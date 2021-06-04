@@ -15,14 +15,19 @@ import { Text, View } from "react-native"
 import styles from "react-native-short-styles"
 
 // In your any react-native component
-;<View style={styles("f1 ic jc")}>
-  <Text style={styles("")}></Text>
-</View>
+function Example() {
+  return (
+    <View style={styles("f1 ic jc")}>
+      <Text style={styles("tb clgreen")}>I'm green bold yext</Text>
+    </View>
+  )
+}
 ```
 
 # Short Styles List
 
-The Listing is in alphabetical order of the properties in each section
+The listing mostly is in alphabetical order of the properties in each section.
+Values which are in bold, are the default value, for that property.
 
 ## Spacing and Borders
 
