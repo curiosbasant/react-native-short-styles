@@ -3,5 +3,17 @@
   "author": "CuriosBasant",
   "version": "1.0.0",
   "main": "index.js",
+  "description": "A simple and efficient package to style react-native components with shortcodes.",
+  "keywords": [
+    "react-native",
+    "react-native-styles",
+    "short-styles"
+  ],
+  "homepage": "https://github.com/CuriosBasant/react-native-short-styles#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CuriosBasant/react-native-short-styles.git"
+  },
+  "bugs": "https://github.com/CuriosBasant/react-native-short-styles/issues",
   "license": "MIT"
 }
