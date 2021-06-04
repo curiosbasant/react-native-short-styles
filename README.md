@@ -1,0 +1,1 @@
+# react-native-short-styles
