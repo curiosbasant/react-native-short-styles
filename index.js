@@ -11,7 +11,11 @@ const shortcodeMapping = {
     e: "paddingEnd",
     h: "paddingHorizontal",
     v: "paddingVertical",
-    a: { key: "position", value: "absolute" },
+    // pa could be used for absolute position, but then `pr` would be conflicting for relative
+    o: {
+      a: { key: "position", value: "absolute" },
+      r: { key: "position", value: "relative" },
+    },
   },
   m: {
     DEFAULT: "margin",
@@ -24,19 +28,40 @@ const shortcodeMapping = {
     h: "marginHorizontal",
     v: "marginVertical",
   },
+  get "-m"() {
+    return this.m
+  },
   b: {
-    t: "borderTopWidth",
-    s: { key: "borderStyle", value: "solid" },
-    h: { key: "borderStyle", value: "dashed" },
-    d: { key: "borderStyle", value: "dotted" },
+    DEFAULT: "borderWidth",
+    c: "borderColor",
+    t: { DEFAULT: "borderTopWidth", c: "borderTopColor" },
+    l: { DEFAULT: "borderLeftWidth", c: "borderLeftColor" },
+    b: { DEFAULT: "borderBottomWidth", c: "borderBottomColor" },
+    r: { DEFAULT: "borderRightWidth", c: "borderRightColor" },
+    e: { DEFAULT: "borderEndWidth", c: "borderEndColor" },
+    s: {
+      DEFAULT: "borderStartWidth",
+      c: "borderStartColor",
+      s: { key: "borderStyle", value: "solid" },
+      h: { key: "borderStyle", value: "dashed" },
+      d: { key: "borderStyle", value: "dotted" },
+    },
     g: "backgroundColor",
   },
   r: {
     DEFAULT: "borderRadius",
-    tl: "borderTopLeftRadius",
-    tr: "borderTopRightRadius",
-    bl: "borderBottomLeftRadius",
-    br: "borderBottomRightRadius",
+    t: {
+      l: "borderTopLeftRadius",
+      r: "borderTopRightRadius",
+      s: "borderTopStartRadius",
+      e: "borderTopEndRadius",
+    },
+    b: {
+      l: "borderBottomLeftRadius",
+      r: "borderBottomRightRadius",
+      s: "borderBottomStartRadius",
+      e: "borderBottomEndRadius",
+    },
   },
 
   o: {
@@ -55,7 +80,7 @@ const shortcodeMapping = {
   h: {
     DEFAULT: "height",
     n: "minHeight",
-    x: "minHeight",
+    x: "maxHeight",
   },
   w: {
     DEFAULT: "width",
@@ -116,14 +141,13 @@ const shortcodeMapping = {
     e: { key: "justifyContent", value: "flex-end" },
     s: { key: "justifyContent", value: "flex-start" },
   },
-  z: "zIndex",
 
   t: {
-    f: { key: "fontFamily", value: "" },
+    // f: { key: "fontFamily", value: "" },
     s: {
       DEFAULT: "fontSize",
-      n: { key: "fontStyle", value: "normal" },
       i: { key: "fontStyle", value: "italic" },
+      n: { key: "fontStyle", value: "normal" },
     },
     b: { key: "fontWeight", value: "bold" },
     n: { key: "fontWeight", value: "normal" },
@@ -149,9 +173,10 @@ const shortcodeMapping = {
       u: { key: "textTransform", value: "uppercase" },
     },
   },
+  z: "zIndex",
 }
 
-export default function styles(str, ...[]) {
+module.exports = function styles(str, ...[]) {
   if (!str) return
   const yes = {}
 
@@ -166,8 +191,6 @@ export default function styles(str, ...[]) {
   }
   return yes
 }
-
-// console.log(styles("-fc tls", "p10% tvt"))
 
 function parse(obj_str, nextCode, map, isNegative, counter = 0) {
   if (counter > 20) return console.log("Just saved your ass")
@@ -191,4 +214,3 @@ function parse(obj_str, nextCode, map, isNegative, counter = 0) {
     }
   }
 }
-console
